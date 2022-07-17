@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "parcel --dist-dir docs/",
-    "build": "yarn cp:worker && parcel build --public-url 'pdf-grid/'",
+    "build": "yarn cp:worker && parcel build --public-url './'",
     "lint": "eslint src/.",
     "lint:fix": "eslint --fix src/.",
     "cp:worker": "cp ./node_modules/pdfjs-dist/build/pdf.worker.min.js ./docs/"

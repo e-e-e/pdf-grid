@@ -13,14 +13,12 @@ document.addEventListener('dragover', (event) => {
   event.preventDefault();
 });
 document.addEventListener('drop', (event) => {
-  // prevent default action (open as link for some elements)
   event.preventDefault();
   if (event.dataTransfer && event.dataTransfer.items.length > 0) {
     const file = event.dataTransfer.items[0].getAsFile();
     if (!file || file.type !== 'application/pdf') return;
     file.arrayBuffer().then((data) => makePdfGridFrom(new Uint8Array(data)));
   }
-  // move dragged element to the selected drop target
   console.log('dropped');
 });
 
@@ -63,11 +61,8 @@ async function fetchPageDimensions(doc: PDFDocumentProxy) {
   const height = size[3];
   const ratio = width / height;
   const grid = Math.sqrt(pageNumbers);
-  console.log(grid);
   const gridWidth = grid / ratio;
   const gridHeight = grid * ratio;
-  console.log(gridWidth, gridHeight);
-  console.log(width, height, ratio);
   return {
     width,
     height,
@@ -79,10 +74,9 @@ async function fetchPageDimensions(doc: PDFDocumentProxy) {
 async function makePdfGridFrom(source: string | Uint8Array) {
   const doc = await pdfjsLib.getDocument(source).promise;
   const dimensions = await fetchPageDimensions(doc);
-  const scale = 0.3;
+  const scale = 2;
   const w = Math.ceil(dimensions.gridWidth);
   const h = Math.ceil(dimensions.gridHeight);
-  console.log(w, h);
   canvas.width = w * dimensions.width * scale;
   canvas.height = h * dimensions.height * scale;
   const ctx = canvas.getContext('2d');

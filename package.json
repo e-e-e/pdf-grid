@@ -3,17 +3,21 @@
   "version": "1.0.0",
   "license": "MIT",
   "source": "src/index.html",
-  "target": {
+  "browserslist": ["last 3 chrome version",
+    "last 2 firefox version",
+    "last 1 safari version"
+  ],
+  "targets": {
     "default": {
       "distDir": "docs/"
     }
   },
   "scripts": {
-    "dev": "parcel",
-    "build": "parcel build",
+    "dev": "parcel --dist-dir docs/",
+    "build": "yarn cp:worker && parcel build",
     "lint": "eslint src/.",
     "lint:fix": "eslint --fix src/.",
-    "cp:worker": "cp ./node_modules/pdfjs-dist/build/pdf.worker.min.js ./dist/"
+    "cp:worker": "cp ./node_modules/pdfjs-dist/build/pdf.worker.min.js ./docs/"
   },
   "dependencies": {
     "pdfjs-dist": "^2.14.305"

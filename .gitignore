@@ -1,0 +1,9 @@
+.env
+.yarn/
+.idea/
+.parcel-cache/
+node_modules/
+dist/
+*.pem
+*.tsbuildinfo
+*.log
